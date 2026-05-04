@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Girl 💖</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family: 'Segoe UI';
+    text-align:center;
+    color:white;
+    background:black;
+}
+
+/* Stars Background */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* Hearts */
+.heart{
+    position:absolute;
+    color:#ff4e50;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+#screen{
+    margin-top:80px;
+    font-size:28px;
+    white-space:pre;
+}
+
+/* Images */
+img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    margin:10px;
+    box-shadow:0 0 20px pink;
+}
+
+/* Button */
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    background:#ff4e50;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="screen"></div>
+<audio src="song.mp3" autoplay loop></audio>
+
+<script>
+
+let s = document.getElementById("screen")
+
+function wait(ms){
+    return new Promise(r=>setTimeout(r,ms))
+}
+
+// Stars
+for(let i=0;i<100;i++){
+    let star=document.createElement("div")
+    star.className="star"
+    star.style.left=Math.random()*100+"vw"
+    star.style.top=Math.random()*100+"vh"
+    document.body.appendChild(star)
+}
+
+// Hearts
+function heart(){
+    let h=document.createElement("div")
+    h.className="heart"
+    h.innerHTML="❤"
+    h.style.left=Math.random()*100+"vw"
+    h.style.fontSize=(20+Math.random()*30)+"px"
+    document.body.appendChild(h)
+    setTimeout(()=>h.remove(),6000)
+}
+setInterval(heart,300)
+
+// Typing
+async function type(text){
+    s.innerHTML=""
+    for(let c of text){
+        s.innerHTML+=c
+        await wait(35)
+    }
+}
+
+// Start
+async function start(){
+
+    await type("✨ Hey My Girl...\n\nI have something for you 💖")
+    await wait(2000)
+
+    s.innerHTML = `
+<img src=".jpg">
+<img src="jpg">
+
+\n\nYou + Me 💕
+`
+    await wait(3000)
+
+    await type("From the day you came into my life...\nEverything became beautiful 🌍")
+    await wait(2500)
+
+    await type("Today is your special day...\nAnd I want to make it unforgettable 🎂")
+    await wait(2500)
+
+    showGift()
+}
+
+// Gift Button
+function showGift(){
+    s.innerHTML += `<br><br><button onclick="proposal()">🎁 Open Surprise</button>`
+}
+
+// Proposal
+function proposal(){
+    s.innerHTML = `
+💖 I LOVE YOU MY GIRL 💖
+
+Will you always be mine? 💍
+
+<br><br>
+<button onclick="final()">Yes ❤️</button><br>
+<button>no</button>
+`
+}
+
+// Final
+function final(){
+    s.innerHTML = `
+🎉 HAPPY BIRTHDAY MY GIRL 🎉
+
+You are my forever 💖
+
+❤️❤️❤️
+`
+    s.style.fontSize="40px"
+}
+
+start()
+
+</script>
+
+</body>
+</html>
